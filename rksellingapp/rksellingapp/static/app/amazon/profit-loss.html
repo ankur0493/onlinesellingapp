@@ -1,0 +1,51 @@
+<form name="amazonForm" id="amazonForm">
+    <div class="container">
+        <div class="row row-spacer">
+            <label for="product_name" class="col-6 col-md-4">Product Name</label>
+            <input type="text" id="product_name" class="col-6 col-md-4" ng-model="amazonFormData.product_name" placeholder="Enter Product Name" required></input>
+            <div class="clearfix"></div>
+        </div>
+
+        <div class="row row-spacer">
+            <label for="purchase_price_with_gst" class="col-md-4 col-6">Purchase Price (With GST)</label>
+            <input type="text" id="purchase_price_with_gst" class="col-md-4 col-6" ng-model="amazonFormData.purchase_price_with_gst" placeholder="Enter Product Name" required></input>
+        </div>
+
+        <div class="row row-spacer">
+            <label for="weight" class="col-md-4 col-6" >Weight (in grams)</label>
+            <input type="text" id="weight" class="col-md-4 col-6" ng-model="amazonFormData.weight" placeholder="Enter Weight (in grams)" required></input>
+        </div>
+        <div class="row row-spacer">
+            <label for="region" class="col-md-4 col-6">Region</label>
+            <select ng-model="amazonFormData.region" class="col-md-4 col-6" ng-options="region for region in ['Local', 'Zonal', 'National']" id="region" required>
+            </select>
+        </div>
+        <div class="row row-spacer">
+            <label for="list_price" class="col-md-4 col-6">List Price</label>
+            <input type="text" id="list_price" class="col-md-4 col-6" ng-model="amazonFormData.list_price" placeholder="Enter Listing Price" required></input>
+        </div>
+        <div class="row row-spacer">
+            <label for="amazon_fee" class="col-md-4 col-6">Amazon Fee</label>
+            <input type='text' id="amazon_fee" class="col-md-4 col-6" ng-model="amazonFormData.amazon_fee" ng-disabled='true'></input>
+        </div>
+        <div class="row row-spacer">
+            <label for="gst_to_be_paid" class="col-md-4 col-6">Extra GST to be paid to Government</label>
+            <input type='text' id="gst_to_be_paid" class="col-md-4 col-6" ng-model="amazonFormData.gst_to_be_paid" ng-disabled='true'></input>
+        </div>
+        <div class="row row-spacer">
+            <label for="shipping_cost" class="col-md-4 col-6">Shipping Cost</label>
+            <input type='text' id="shipping_cost" class="col-md-4 col-6" ng-model="amazonFormData.shipping_cost" ng-disabled='true'></input>
+        </div>
+        <div class="row row-spacer">
+            <label for="pnl" class="col-md-4 col-6">Profit/Loss</label>
+            <input type='text' id="pnl" class="col-md-4 col-6" ng-model="amazonFormData.pnl" ng-disabled='true'></input>
+        </div>
+        <div class="row row-spacer">
+            <div class="col-md-1 col-2"></div>
+            <button id="amazonFormReset" ng-click="resetAmazonForm()" class="col-md-2 col-3">Reset</button>
+            <div class="col-md-2 col-2"></div>
+            <button type="submit" id="amazonFormSubmit" ng-click="submitAmazonForm()" class="col-md-2 col-3">Submit</button>
+            <div class="col-md-1 col-2"></div>
+        </div>
+    </div>
+</form>
