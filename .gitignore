@@ -1,0 +1,37 @@
+**/node_modules
+**/*.pyc
+**/virtualenv
+**/static/gen/**
+**/static/field/gen/**
+**/static/fsr/gen/**
+**/.idea
+**/.vscode
+**/.webassets-cache
+**/.DS_Store
+**/.vscode
+
+# Prohibited
+**/templates/**/*.js
+**/html/**/*.js
+**/static/app/**/*.*
+!**/static/app/**/*.js
+
+**/*.json
+!**/lib/*.json
+*.log
+
+# Upload directory
+sas/media/*
+media/*
+
+# Collected Static Files
+static/**
+!*/fixtures/*.json
+
+# Mocks
+# !**/field/assets/json/mocks/*.json
+nohup.out
+*.swp
+*.swo
+*.swn
+

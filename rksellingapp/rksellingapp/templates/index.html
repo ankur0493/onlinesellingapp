@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+{% load assets %}
+<html>
+    <head>
+        <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
+        <title>Amazon Profit/Loss Calculation</title>
+
+        {% assets "css_common" %}
+        <link rel="stylesheet" type="text/css" href="{{ ASSET_URL }}" />
+        {% endassets %}
+    </head>
+    <body ng-app="sellerapp">
+        {% assets "js_common_libraries" %}
+        <script type="text/javascript" src="{{ ASSET_URL }}"></script>
+        {% endassets %}
+        {% assets "js_common_app" %}
+        <script type="text/javascript" src="{{ ASSET_URL }}"></script>
+        {% endassets %}
+
+        <style type="text/css">
+            .row-spacer{
+                margin-top: 5px;
+            }
+        </style>
+        <div ui-view></div>
+    </body>
+</html>
