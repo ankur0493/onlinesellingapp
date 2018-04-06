@@ -1,19 +1,19 @@
 <form name="amazonForm" id="amazonForm">
     <div class="container">
         <div class="row row-spacer">
-            <label for="product_name" class="col-6 col-md-4">Product Name*</label>
-            <input type="text" id="product_name" class="col-6 col-md-4" ng-model="amazonFormData.product_name" placeholder="Enter Product Name" required></input>
+            <label for="product_name" class="col-6 col-md-4">Product Name</label>
+            <input type="text" id="product_name" class="col-6 col-md-4" ng-model="amazonFormData.product_name" placeholder="Enter Product Name"></input>
             <div class="clearfix"></div>
         </div>
 
         <div class="row row-spacer">
             <label for="purchase_price_with_gst" class="col-md-4 col-6">Purchase Price (With GST)*</label>
-            <input type="text" id="purchase_price_with_gst" class="col-md-4 col-6" ng-model="amazonFormData.purchase_price_with_gst" placeholder="Enter Purchase Price" required></input>
+            <input type="number" id="purchase_price_with_gst" class="col-md-4 col-6" ng-model="amazonFormData.purchase_price_with_gst" placeholder="Enter Purchase Price" required></input>
         </div>
 
         <div class="row row-spacer">
             <label for="weight" class="col-md-4 col-6" >Weight (in grams)*</label>
-            <input type="text" id="weight" class="col-md-4 col-6" ng-model="amazonFormData.weight" placeholder="Enter Weight (in grams)" required></input>
+            <input type="number" id="weight" class="col-md-4 col-6" ng-model="amazonFormData.weight" placeholder="Enter Weight (in grams)" required></input>
         </div>
         <div class="row row-spacer">
             <label for="region" class="col-md-4 col-6">Region*</label>
@@ -22,7 +22,7 @@
         </div>
         <div class="row row-spacer">
             <label for="list_price" class="col-md-4 col-6">List Price (Without Shipping)*</label>
-            <input type="text" id="list_price" class="col-md-4 col-6" ng-model="amazonFormData.list_price" placeholder="Enter Listing Price" required></input>
+            <input type="number" id="list_price" class="col-md-4 col-6" ng-model="amazonFormData.list_price" placeholder="Enter Listing Price" required></input>
         </div>
         <div class="row row-spacer">
             <label for="amazon_fee" class="col-md-4 col-6">Amazon Fee</label>

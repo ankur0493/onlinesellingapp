@@ -11,6 +11,7 @@
 **/*.json
 !**/lib/*.json
 *.log
+**/gen/*
 
 # Upload directory
 sas/media/*

@@ -6,7 +6,7 @@ from rest_framework import serializers
 
 
 class AmazonProfitLossSerializer(serializers.Serializer):
-    product_name = serializers.CharField(label=_("Product Name"))
+    product_name = serializers.CharField(label=_("Product Name"), required=False)
     purchase_price_with_gst = serializers.IntegerField()
     weight = serializers.IntegerField(label=_("Weight (in grams)"))
     region = serializers.ChoiceField(choices=["Local", "Zonal", "National"])
