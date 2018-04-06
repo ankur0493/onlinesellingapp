@@ -7,6 +7,7 @@
             '$http',
             function($scope, $http) {
                 $scope.amazonFormData = {};
+                $scope.amazonFormData.region = 'National';
 
                 $scope.submitAmazonForm = function() {
                     var formData = $scope.amazonFormData;
