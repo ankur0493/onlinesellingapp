@@ -1,5 +1,6 @@
 from __future__ import unicode_literals
 
+from decimal import Decimal
 import math
 
 from rest_framework.response import Response
@@ -15,9 +16,9 @@ class AmazonProfitLossAPI(APIView) :
     def post(self, request, *args, **kwargs):
         serializer = self.serializer_class(data=request.data)
         if serializer.is_valid(raise_exception=True):
-            purchase_price = serializer.data['purchase_price_with_gst']/1.18
-            gst_paid = serializer.data['purchase_price_with_gst'] - purchase_price
-            amazon_fee = shipping_cost = gst_to_be_paid = pnl = 0
+            purchase_price = Decimal(serializer.data['purchase_price_with_gst'])/Decimal('1.18')
+            gst_paid = Decimal(serializer.data['purchase_price_with_gst']) - purchase_price
+            amazon_fee = shipping_cost = gst_to_be_paid = pnl = Decimal(0)
             if serializer.data['list_price']:
                 if serializer.data['region'] == 'Local':
                     customer_shipping_charge = 115
@@ -25,14 +26,18 @@ class AmazonProfitLossAPI(APIView) :
                     customer_shipping_charge = 130
                 elif serializer.data['region'] == 'National':
                     customer_shipping_charge = 150
-                amazon_selling_price = serializer.data['list_price'] + customer_shipping_charge
+                customer_shipping_charge = Decimal(customer_shipping_charge)
+                amazon_selling_price = Decimal(serializer.data['list_price']) + customer_shipping_charge
                 if amazon_selling_price <= 500:
                     closure_fee = 10
                 elif 500 < amazon_selling_price <= 1000:
                     closure_fee = 20
                 else:
                     closure_fee = 40
-                amazon_fee = ((amazon_selling_price * 0.085) + closure_fee) * 1.18
+                closure_fee = Decimal(closure_fee)
+                amazon_fee = (
+                    ((amazon_selling_price * Decimal('0.085')) + closure_fee) * Decimal('1.18'))
+                amazon_fee = amazon_fee.quantize(Decimal('.01'))
                 increments = 500 if serializer.data['weight'] < 5000 else 1000
                 if serializer.data['region'] == "Local":
                     if serializer.data['weight'] < 5000:
@@ -54,11 +59,19 @@ class AmazonProfitLossAPI(APIView) :
                     else:
                         base_rate = 180
                         add_on_rate = 13
-                shipping_cost = (base_rate + (math.ceil(serializer.data['weight']/increments) - 1) * add_on_rate) * 1.18
-                amazon_fee_shipping_gst = (amazon_fee + shipping_cost) - ((amazon_fee + shipping_cost) / 1.18)
-                gst_to_be_paid = amazon_selling_price*0.09/0.59 - amazon_fee_shipping_gst - gst_paid
-                packing_charge = 20
-                pnl = (amazon_selling_price - serializer.data['purchase_price_with_gst']
+                shipping_cost = Decimal(
+                    (base_rate + (math.ceil(serializer.data['weight']/increments) - 1)
+                     * add_on_rate) * 1.18)
+                shipping_cost = shipping_cost.quantize(Decimal('.01'))
+                amazon_fee_shipping_gst = (
+                    (amazon_fee + shipping_cost) - ((amazon_fee + shipping_cost)
+                     / Decimal('1.18')))
+                gst_to_be_paid = (
+                    (amazon_selling_price * Decimal('0.09') / Decimal('0.59'))
+                    - amazon_fee_shipping_gst - gst_paid)
+                gst_to_be_paid = gst_to_be_paid.quantize(Decimal('.01'))
+                packing_charge = Decimal('20')
+                pnl = (amazon_selling_price - Decimal(serializer.data['purchase_price_with_gst'])
                        - amazon_fee - shipping_cost - packing_charge - gst_to_be_paid)
             data = serializer.data.copy()
             data.update({
