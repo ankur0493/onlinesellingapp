@@ -20,6 +20,7 @@ from .views import IndexView
 
 urlpatterns = [
     url(r'^$', IndexView.as_view()),
-    url(r'^amazon/', include('amazon.urls')),
     url(r'^admin/', admin.site.urls),
+    url(r'^amazon/', include('amazon.urls')),
+    url(r'^seller/', include('seller.urls'))
 ]

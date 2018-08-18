@@ -40,12 +40,13 @@ INSTALLED_APPS = [
 
     # Third Party Libraries
     'rest_framework',
-
     'django_assets',
+    'django_countries',
 
     # Apps
     'rksellingapp',
     'amazon',
+    'seller',
 ]
 
 MIDDLEWARE = [
@@ -130,9 +131,22 @@ USE_TZ = True
 # https://docs.djangoproject.com/en/1.11/howto/static-files/
 
 STATIC_URL = '/static/'
+STATIC_ROOT = os.path.join(BASE_DIR, 'rksellingapp', 'static')
 
 STATICFILES_FINDERS = (
     'django.contrib.staticfiles.finders.FileSystemFinder',
     'django.contrib.staticfiles.finders.AppDirectoriesFinder',
     'django_assets.finders.AssetsFinder',
 )
+
+REST_FRAMEWORK = {
+    'DEFAULT_AUTHENTICATION_CLASSES': (
+        'rest_framework.authentication.BasicAuthentication',
+        'rest_framework.authentication.SessionAuthentication',
+    )
+}
+
+try:
+    from .keys import *
+except:
+    pass

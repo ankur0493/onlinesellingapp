@@ -8,12 +8,18 @@
             'ngSanitize',
             'ui.bootstrap',
             'ui.router',
-            'sellerapp.amazon'
+            'sellerapp.amazon',
+            // 'sellerapp.authentication',
         ]);
 
     app.config(function($stateProvider, $urlRouterProvider) {
         $stateProvider
-            .state('index', {
+            // .state('index', {
+            //     url: '',
+            //     templateUrl: 'static/app/templates/login.html',
+            //     controller: 'loginController'
+            // })
+            .state('profit-loss-calculator', {
                 url: '',
                 templateUrl: 'static/app/amazon/profit-loss.html',
                 controller: 'amazonProfitLossController'

@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+{% load staticfiles %}
+{% load assets %}
+<html>
+<head>
+<meta http-equiv="Content-type" content="text/html; charset=utf-8" /> 
+</head>
+<body>
+Items sold by {{ seller_address.name }} on www.amazon.in<br /><br />
+<strong>TO:</strong><br />
+{% if shipping_address %}
+{% if shipping_address.name %}{{ shipping_address.name }}<br />{% endif %}
+{% if shipping_address.address_line_1 %}{{ shipping_address.address_line_1 }}<br />{% endif %}
+{% if shipping_address.address_line_2 %}{{ shipping_address.address_line_2 }}<br />{% endif %}
+{% if shipping_address.address_line_3 %}{{ shipping_address.address_line_3 }}<br />{% endif %}
+{% if shipping_address.city %}{{ shipping_address.city }}, {% endif %}
+{% if shipping_address.district %}{{ shipping_address.district }}, {% endif %}
+{% if shipping_address.state %}{{ shipping_address.state }} {% endif %}
+{% if shipping_address.postal_code %}- {{ shipping_address.postal_code }}<br />{% endif %}
+{% if shipping_address.country %}{{ shipping_address.country }}<br />{% endif %}
+{% if shipping_address.phone_number %}Phone: {{ shipping_address.phone_number }}<br />{% endif %}
+<br />
+{% endif %}
+<strong>Shipped From:</strong><br />
+{% if seller_address %}
+{% if seller_address.name %}{{ seller_address.name }}<br />{% endif %}
+{% if seller_address.address_line_1 %}{{ seller_address.address_line_1 }}<br />{% endif %}
+{% if seller_address.address_line_2 %}{{ seller_address.address_line_2 }}<br />{% endif %}
+{% if seller_address.address_line_3 %}{{ seller_address.address_line_3 }}<br />{% endif %}
+{% if seller_address.city %}{{ seller_address.city }}, {% endif %}
+{% if seller_address.district %}{{ seller_address.district }}, {% endif %}
+{% if seller_address.state %}{{ seller_address.state }} {% endif %}
+{% if seller_address.postal_code %}- {{ seller_address.postal_code }}<br />{% endif %}
+{% if seller_address.country %}{{ seller_address.country }}<br />{% endif %}
+{% if seller_address.phone_number %}Phone: {{ seller_address.phone_number }}<br />{% endif %}
+<br />
+{% endif %}
+
+<strong>Customer Self Declaration: I, {{ shipping_address.name }}, hereby confirm that the content of this package are being purchased for my internal and personal purpose and not for re-sale. I further understand and agree to Amazon's terms and conditions of sale available at www.amazon.in</strong>
+</body>
+</html>

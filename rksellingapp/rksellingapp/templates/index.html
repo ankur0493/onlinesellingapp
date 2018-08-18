@@ -1,4 +1,5 @@
 <!DOCTYPE html>
+{% load staticfiles %}
 {% load assets %}
 <html>
     <head>
@@ -24,9 +25,9 @@
                 margin-top: 5px;
             }
         </style>
+        <nav class="navbar navbar-expand-lg navbar-light bg-light"><div class="navbar-text text-center">Upcoming Feature: Schedule Shipments and send shipping documents automatically to email.</span></nav>
         <div class="container">
-        <b>Upcoming Feature: </b>Schedule Shipments and send shipping documents automatically to email.<br />
+            <div ui-view></div>
         </div>
-        <div ui-view></div>
     </body>
 </html>

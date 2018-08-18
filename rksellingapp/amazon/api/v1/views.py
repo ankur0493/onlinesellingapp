@@ -5,9 +5,10 @@ import math
 
 from rest_framework.response import Response
 from rest_framework.views import APIView 
-from rest_framework import status
+from rest_framework import generics, status
 
-from .serializers import AmazonProfitLossSerializer
+from .serializers import AmazonProfitLossSerializer, AmazonOrderSerializer
+from amazon.models import AmazonOrder
 
 
 class AmazonProfitLossAPI(APIView) :
@@ -36,26 +37,31 @@ class AmazonProfitLossAPI(APIView) :
                     closure_fee = 40
                 closure_fee = Decimal(closure_fee)
                 amazon_fee = (
-                    ((amazon_selling_price * Decimal('0.085')) + closure_fee) * Decimal('1.18'))
+                    ((amazon_selling_price * Decimal('0.1')) + closure_fee) * Decimal('1.18'))
                 amazon_fee = amazon_fee.quantize(Decimal('.01'))
-                increments = 500 if serializer.data['weight'] < 5000 else 1000
+                # increments = 500 if serializer.data['weight'] < 5000 else 1000
+                increments = 1000
                 if serializer.data['region'] == "Local":
                     if serializer.data['weight'] < 5000:
-                        base_rate = add_on_rate =30
+                        base_rate = add_on_rate = 30
                     else:
                         base_rate = 80
                         add_on_rate = 9
                 elif serializer.data['region'] == "Zonal":
                     if serializer.data['weight'] < 5000:
-                        base_rate = 45
-                        add_on_rate = 35
+                        # base_rate = 45
+                        # add_on_rate = 35
+                        base_rate = 25
+                        add_on_rate = 25
                     else:
                         base_rate = 130
                         add_on_rate = 11
                 elif serializer.data['region'] == "National":
                     if serializer.data['weight'] < 5000:
-                        base_rate = 65
-                        add_on_rate = 45
+                        # base_rate = 65
+                        # add_on_rate = 45
+                        base_rate = 80
+                        add_on_rate = 80
                     else:
                         base_rate = 180
                         add_on_rate = 13
@@ -81,3 +87,8 @@ class AmazonProfitLossAPI(APIView) :
                 'pnl': pnl,
             })
             return Response(data=data, status=status.HTTP_200_OK)
+
+
+class AmazonOrderListAPI(generics.ListAPIView):
+    serializer_class = AmazonOrderSerializer
+    queryset = AmazonOrder.objects.all()

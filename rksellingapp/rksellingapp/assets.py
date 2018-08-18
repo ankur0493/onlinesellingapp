@@ -1,7 +1,6 @@
 from django_assets import Bundle, register
 
-BP = 'rksellingapp/static/'
-NM = BP + 'lib/node_modules/'
+NM = 'lib/node_modules/'
 
 
 css_common = Bundle(
@@ -34,10 +33,16 @@ js_common_libraries = Bundle(
 register('js_common_libraries', js_common_libraries)
 
 js_common_app = Bundle(
-    BP + 'app/app.js',
-    BP + 'app/amazon/index.js',
-    BP + 'app/amazon/controllers/index.js',
-    BP + 'app/amazon/controllers/profit-loss-controller.js',
+    'app/app.js',
+    'app/amazon/index.js',
+    'app/amazon/controllers/index.js',
+    'app/amazon/services/index.js',
+    'app/amazon/controllers/profit-loss-controller.js',
+
+    'app/authentication/index.js',
+    'app/authentication/controllers/index.js',
+    'app/authentication/services/index.js',
+    'app/authentication/controllers/login-controller.js',
 
     output='gen/common_app.js')
 
