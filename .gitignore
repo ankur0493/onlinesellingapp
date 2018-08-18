@@ -9,7 +9,6 @@
 **/.DS_Store
 **/.vscode
 
-**/*.json
 !**/lib/*.json
 *.log
 **/gen/*
@@ -17,9 +16,6 @@
 # Upload directory
 sas/media/*
 media/*
-
-# Collected Static Files
-!*/fixtures/*.json
 
 # Mocks
 # !**/field/assets/json/mocks/*.json
