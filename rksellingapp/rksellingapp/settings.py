@@ -86,10 +86,10 @@ WSGI_APPLICATION = 'rksellingapp.wsgi.application'
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.postgresql',
-        'NAME': os.environ.get("DJANGO_APPLICATION_DATABASE_USER"),
-        'USER': os.environ.get("DJANGO_APPLICATION_DATABASE_USER"),
-        'PASSWORD': os.environ.get("DJANGO_APPLICATION_DATABASE_PASS"),,
-        'HOST': os.environ.get("DJANGO_APPLICATION_DATABASE_HOST"),
+        'NAME': 'rksellingapp',
+        'USER': 'ankur',
+        'PASSWORD': '123',
+        'HOST': 'localhost',
     }
 }
 

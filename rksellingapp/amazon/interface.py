@@ -139,7 +139,7 @@ def save_order_information(order, seller):
                 order_obj.payment_methods.add(payment_method)
 
 
-def get_orders_list(seller=None):
+def get_orders_list(seller=None, num_days=7):
     if seller is None:
         raise Exception("Please provide the seller")
 
@@ -157,7 +157,7 @@ def get_orders_list(seller=None):
     orders_api_version = '2013-09-01'
     timestamp = timezone.now().isoformat()
 
-    last_updated_after = timezone.now() - timedelta(days=7)
+    last_updated_after = timezone.now() - timedelta(days=num_days)
     last_updated_after_timestamp = last_updated_after.isoformat()
 
     query_params = {
@@ -188,6 +188,8 @@ def get_orders_list(seller=None):
         MWS_IN_MARKETPLACE_BASE_URL, MWS_ORDERS_API_ENDPOINT, query_string)
     response = requests.post(query_url)
     data = xmltodict.parse(response.content)
+    print(data)
+    print(response.headers)
     orders = data['ListOrdersResponse']['ListOrdersResult']['Orders']['Order']
     for order in orders:
         save_order_information(order, seller)
